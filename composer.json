@@ -1,0 +1,22 @@
+{
+    "name": "viragrajput/viraghttpfoundation",
+    "description": "A lightweight HTTP foundation package for PHP.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ViragHttpFoundation\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ViragRajput",
+            "email": "108286928+ViragRajput@users.noreply.github.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "symfony/var-dumper": "^5.0",
+        "phpunit/phpunit": "^9.0"
+    }
+}
