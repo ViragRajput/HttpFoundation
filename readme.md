@@ -70,37 +70,55 @@ $file = new UploadedFile(
 // Move uploaded file to destination directory
 $file->move('uploads/');
 ```
+For more details example of this class, please check docs folder.
 
 ### HTTP Response Generation
 
 ```php
 use ViragHttpFoundation\Response;
 
-// Create a response
-$response = new Response('Hello, World!', 200, ['Content-Type' => 'text/plain']);
+// Create a response with JSON content
+$response = new Response();
+$response->setJsonResponse(['message' => 'Success'], 200);
+$response->send();
 
-// Send the response
+// Create a response with HTML content
+$htmlContent = "<html><body><h1>Hello, World!</h1></body></html>";
+$response = new Response();
+$response->setHtmlResponse($htmlContent, 200);
+$response->send();
+
+// Create a redirect response
+$response = new Response();
+$response->setRedirectResponse('/new-page', 302);
+$response->send();
+
+// Create a response with custom headers
+$response = new Response();
+$response->setHtmlResponse('Custom Content', 200);
+$response->setHeader('X-Custom-Header', 'Value');
+$response->send();
+
+// Create a response with an error message
+$response = new Response();
+$response->setBadRequestResponse('Bad Request');
 $response->send();
 ```
 
 ### HTTP Request Processing
 
+The `createFromGlobals` method creates a `Request` object based on the global variables available in PHP, such as `$_SERVER`, `$_REQUEST`, and `php://input`. This method is convenient for creating request objects in a standardized way, especially in web applications where requests are typically handled through the global scope.
+
 ```php
 use ViragHttpFoundation\Request;
 
-// Create a request object
-$request = new Request();
+// Create a request object from global variables
+$request = Request::createFromGlobals();
 
-// Get request method
+// Now you can access various properties and methods of the $request object
 $method = $request->getMethod();
-
-// Get request URI
-$uri = $request->getRequestUri();
-
-// Get request parameters
-$params = $request->getParams();
-
-// Get request headers
+$uri = $request->getUri();
+$params = $request->getParameters();
 $headers = $request->getHeaders();
 ```
 
