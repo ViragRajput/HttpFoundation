@@ -240,4 +240,67 @@ class Request
     {
         return in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']);
     }
+
+    public static function createFromGlobals(): self
+    {
+        $headers = [];
+        foreach ($_SERVER as $key => $value) {
+            if (strpos($key, 'HTTP_') === 0) {
+                $headerName = str_replace('HTTP_', '', $key);
+                $headerName = str_replace('_', '-', ucwords(strtolower($headerName), '_'));
+                $headers[$headerName] = $value;
+            }
+        }
+
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+        $uri = $_SERVER['REQUEST_URI'] ?? '/';
+        $body = file_get_contents('php://input');
+
+        return new self($headers, $_REQUEST, $method, $uri, $body);
+    }
+
+    public function getSchemeAndHttpHost(): string
+    {
+        $scheme = $this->getScheme();
+        $httpHost = $this->headers['Host'] ?? '';
+
+        return $scheme . '://' . $httpHost;
+    }
+
+    public function getQueryString(): string
+    {
+        return $_SERVER['QUERY_STRING'] ?? '';
+    }
+
+    public function getQuery(): array
+    {
+        parse_str($this->getQueryString(), $query);
+
+        return $query;
+    }
+
+    public function files(): array
+    {
+        return $_FILES;
+    }
+
+    public function file(string $key): ?UploadedFile
+    {
+        return $_FILES[$key] ?? null;
+    }
+
+    public function getHost(): string
+    {
+        return $this->headers['Host'] ?? '';
+    }
+
+    public function getPort(): int
+    {
+        return $_SERVER['SERVER_PORT'] ?? 0;
+    }
+
+    public function getContent(): string
+    {
+        return $this->body;
+    }
 }

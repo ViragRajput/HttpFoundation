@@ -33,6 +33,11 @@ class Response
         $this->content = $content;
     }
 
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
     public function getStatusCode(): int
     {
         return $this->statusCode;
@@ -366,5 +371,99 @@ class Response
     {
         $this->setContent($xml);
         $this->setHeader('Content-Type', 'application/xml; charset=utf-8');
+    }
+
+    // 
+
+    public function getHeader(string $name): ?string
+    {
+        return $this->headers[$name] ?? null;
+    }
+
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
+    public function appendContent(string $content): void
+    {
+        $this->content .= $content;
+    }
+
+    public function prependContent(string $content): void
+    {
+        $this->content = $content . $this->content;
+    }
+
+    public function replaceContent(string $search, string $replace): void
+    {
+        $this->content = str_replace($search, $replace, $this->content);
+    }
+
+    public function setPermanentRedirect(string $url): void
+    {
+        $this->redirect($url, 301);
+    }
+
+    public function getRedirectUrl(): ?string
+    {
+        return $this->getHeader('Location');
+    }
+
+    public function setCache(string $value): void
+    {
+        $this->setHeader('Cache-Control', $value);
+    }
+
+    public function enableCompression(): void
+    {
+        ob_start('ob_gzhandler');
+    }
+
+    public function disableCompression(): void
+    {
+        ob_end_flush();
+    }
+
+    //
+
+    public function isInvalid(): bool
+    {
+        return $this->statusCode < 100 || $this->statusCode >= 600;
+    }
+
+    public function isInformational(): bool
+    {
+        return $this->statusCode >= 100 && $this->statusCode < 200;
+    }
+
+    public function isOk(): bool
+    {
+        return $this->statusCode === 200;
+    }
+
+    public function isSuccessful(): bool
+    {
+        return $this->statusCode >= 200 && $this->statusCode < 300;
+    }
+
+    public function isRedirection(): bool
+    {
+        return $this->statusCode >= 300 && $this->statusCode < 400;
+    }
+
+    public function isClientError(): bool
+    {
+        return $this->statusCode >= 400 && $this->statusCode < 500;
+    }
+
+    public function isServerError(): bool
+    {
+        return $this->statusCode >= 500 && $this->statusCode < 600;
+    }
+
+    public function hasVary(): bool
+    {
+        return isset($this->headers['Vary']);
     }
 }
