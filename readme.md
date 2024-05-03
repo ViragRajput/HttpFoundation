@@ -1,6 +1,6 @@
-# ViragHTTPFoundation
+# Virag HTTPFoundation
 
-ViragHTTPFoundation is a PHP package designed to provide a set of classes for handling HTTP-related tasks, including handling cookies, sessions, file uploads, generating HTTP responses, and processing HTTP requests. This package aims to simplify common HTTP-related operations in PHP web development.
+HTTPFoundation is a PHP package designed to provide a set of classes for handling HTTP-related tasks, including handling cookies, sessions, file uploads, generating HTTP responses, and processing HTTP requests. This package aims to simplify common HTTP-related operations in PHP web development.
 
 ## Features
 
@@ -12,7 +12,7 @@ ViragHTTPFoundation is a PHP package designed to provide a set of classes for ha
 
 ## Installation
 
-You can install the ViragHTTPFoundation package via [Composer](https://getcomposer.org/):
+You can install the HTTPFoundation package via [Composer](https://getcomposer.org/):
 
 ```bash
 composer require viragrajput/http-foundation
@@ -23,7 +23,7 @@ composer require viragrajput/http-foundation
 ### Cookie Handling
 
 ```php
-use ViragHttpFoundation\Cookie;
+use Virag\HttpFoundation\Cookie;
 
 // Set a cookie
 Cookie::set('username', 'john_doe', time() + 3600, '/', 'example.com', true, true);
@@ -38,7 +38,7 @@ Cookie::delete('username');
 ### Session Management
 
 ```php
-use ViragHttpFoundation\Session;
+use Virag\HttpFoundation\Session;
 
 // Start a session
 $session = new Session();
@@ -56,7 +56,7 @@ $session->regenerateId();
 ### File Upload Handling
 
 ```php
-use ViragHttpFoundation\UploadedFile;
+use Virag\HttpFoundation\UploadedFile;
 
 // Handle file upload
 $file = new UploadedFile(
@@ -75,7 +75,7 @@ For more details example of this class, please check docs folder.
 ### HTTP Response Generation
 
 ```php
-use ViragHttpFoundation\Response;
+use Virag\HttpFoundation\Response;
 
 // Create a response with JSON content
 $response = new Response();
@@ -110,7 +110,7 @@ $response->send();
 The `createFromGlobals` method creates a `Request` object based on the global variables available in PHP, such as `$_SERVER`, `$_REQUEST`, and `php://input`. This method is convenient for creating request objects in a standardized way, especially in web applications where requests are typically handled through the global scope.
 
 ```php
-use ViragHttpFoundation\Request;
+use Virag\HttpFoundation\Request;
 
 // Create a request object from global variables
 $request = Request::createFromGlobals();
