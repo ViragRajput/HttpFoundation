@@ -1,6 +1,6 @@
 <?php
 
-namespace ViragHttpFoundation\Exception;
+namespace Virag\HttpFoundation\Exception;
 
 use Exception;
 

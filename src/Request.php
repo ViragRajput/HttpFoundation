@@ -1,6 +1,6 @@
 <?php
 
-namespace ViragHttpFoundation;
+namespace Virag\HttpFoundation;
 
 class Request
 {

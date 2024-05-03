@@ -1,11 +1,11 @@
 {
-    "name": "viragrajput/viraghttpfoundation",
+    "name": "viragrajput/http-foundation",
     "description": "A lightweight HTTP foundation package for PHP.",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "ViragHttpFoundation\\": "src/"
+            "Virag\\HttpFoundation\\": "src/"
         }
     },
     "authors": [
