@@ -15,7 +15,7 @@ ViragHTTPFoundation is a PHP package designed to provide a set of classes for ha
 You can install the ViragHTTPFoundation package via [Composer](https://getcomposer.org/):
 
 ```bash
-composer require viragrajput/viraghttpfoundation
+composer require viragrajput/http-foundation
 ```
 
 ## Usage
