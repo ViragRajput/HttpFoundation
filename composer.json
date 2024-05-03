@@ -14,9 +14,13 @@
             "email": "108286928+ViragRajput@users.noreply.github.com"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "^7.4 || ^8.0"
+    },
     "require-dev": {
         "symfony/var-dumper": "^5.0",
         "phpunit/phpunit": "^9.0"
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
